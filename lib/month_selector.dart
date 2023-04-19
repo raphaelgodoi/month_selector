@@ -32,6 +32,8 @@ class _MonthSelectorState extends State<MonthSelector> {
       );
     }).toList();
     return AppDialog(
+      confirm: () {},
+      cancel: () {},
       yearPage: "2020",
       body: wrapElements(
           elements: elements,
