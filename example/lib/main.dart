@@ -42,7 +42,17 @@ class _MyHomePageState extends State<MyHomePage> {
             showDialog(
                 context: context,
                 builder: (context) {
-                  return const MonthSelector();
+                  return MonthSelector(
+                    selectedDate: month != null ? [month!] : [],
+                    callback: (res) {
+                      Navigator.pop(context);
+                      if (res != null && res != []) {
+                        setState(() {
+                          month = res[0];
+                        });
+                      }
+                    },
+                  );
                 });
           },
           child: Text(month != null ? monthDisplay(month!) : "Selecione o mês"),

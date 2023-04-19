@@ -4,14 +4,21 @@ import 'package:month_selector/src/app_dialog.dart';
 import 'package:month_selector/src/month_enum.dart';
 
 class MonthSelector extends StatefulWidget {
+  final List<DateTime> selectedDate;
   final DateTime? firstDate;
   final DateTime? lastDate;
+  final bool multiSelection;
   final List<String>? months;
+  final void Function(List<DateTime>?) callback;
+
   const MonthSelector({
+    Key? key,
+    required this.callback,
+    this.selectedDate = const [],
     this.firstDate,
     this.lastDate,
+    this.multiSelection = false,
     this.months,
-    Key? key,
   }) : super(key: key);
 
   @override
@@ -21,24 +28,46 @@ class MonthSelector extends StatefulWidget {
 class _MonthSelectorState extends State<MonthSelector> {
   late final DateTime _firstDate;
   late final DateTime _lastDate;
+  late final bool _multiSelection;
   late final DateTime _initialDate;
+  late List<DateTime> _selectedDate;
   late int _yearPage;
 
   @override
   void initState() {
+    _multiSelection = widget.multiSelection;
     _initialDate = formatterDate(DateTime.now());
     _firstDate = widget.firstDate != null
         ? formatterDate(widget.firstDate!)
         : DateTime(_initialDate.year - 2);
     _lastDate = widget.lastDate != null
         ? formatterDate(widget.lastDate!)
-        : DateTime(_initialDate.year + 3, 12);
-    _yearPage = _initialDate.year;
+        : DateTime(_initialDate.year + 5, 12);
+    _selectedDate = widget.selectedDate.isEmpty
+        ? [_initialDate]
+        : widget.selectedDate.map((e) => formatterDate(e)).toList();
+    _yearPage = _selectedDate[0].year;
     super.initState();
   }
 
   DateTime formatterDate(DateTime date) {
     return DateTime(date.year, date.month);
+  }
+
+  bool isSelected(DateTime date) => _selectedDate.contains(date);
+
+  void selectDate(DateTime newDate) {
+    if (isValid(newDate)) {
+      setState(() {
+        if (_multiSelection) {
+          isSelected(newDate)
+              ? _selectedDate.remove(newDate)
+              : _selectedDate.add(newDate);
+        } else {
+          _selectedDate = [newDate];
+        }
+      });
+    }
   }
 
   void left() {
@@ -67,16 +96,16 @@ class _MonthSelectorState extends State<MonthSelector> {
     final elements = MonthEnum.values.map((e) {
       final date = DateTime(_yearPage, e.index + 1);
       return AppCard(
-        width: width,
-        color: Colors.transparent,
+        color: isSelected(date) ? null : Colors.transparent,
         borderColor:
             date == _initialDate ? Theme.of(context).primaryColor : null,
-        onTap: () {},
+        width: width,
+        onTap: () => selectDate(date),
         child: Text(
           widget.months?[e.index] ?? e.name,
           style: TextStyle(
             fontSize: 15,
-            color: isValid(date) ? Colors.black : Colors.black26,
+            color: textColor(date),
           ),
           textAlign: TextAlign.center,
         ),
@@ -86,13 +115,20 @@ class _MonthSelectorState extends State<MonthSelector> {
       yearPage: _yearPage.toString(),
       left: left,
       right: right,
+      cancel: () => widget.callback(null),
+      confirm: () => widget.callback(_selectedDate),
       body: wrapElements(
           elements: elements,
           widthElement: width,
           widthScreen: MediaQuery.of(context).size.width * 0.65),
-      confirm: () {},
-      cancel: () {},
     );
+  }
+
+  Color textColor(DateTime date) {
+    if (isValid(date)) {
+      return isSelected(date) ? Colors.white : Colors.black;
+    }
+    return Colors.black26;
   }
 
   List<Widget> wrapElements(
