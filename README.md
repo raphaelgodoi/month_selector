@@ -1,12 +1,12 @@
 # Month selector
 
-Package que permite ao usuário selecionar um mês e um ano no calendário, sem a necessidade de inserir um dia específico. Ele retorna um Dialog que permite que o usuário selecione um ou mais meses.
+A package that allows the user to select a month and a year on a calendar, without the need to specify a specific day. It returns a Dialog that allows the user to select one or more months.
 
 ## Features
 
-Seleção de um ou vários meses em um calendário;
-Multi-seleção de meses, permitindo a seleção de meses de diferentes anos;
-Personalizável para atender às necessidades específicas de diferentes projetos;
+Selection of one or several months on a calendar;
+Multi-selection of months, allowing the selection of months from different years;
+Customizable to meet specific needs of different projects;
 
 ### Screenshots
 
@@ -17,7 +17,7 @@ Personalizável para atender às necessidades específicas de diferentes projeto
 
 ## How to use
 
-Adicione o widget ´MonthSelector()´ ao código.
+Add the ``MonthSelector` widget to your code.
 
 ### Example
 
@@ -38,11 +38,11 @@ Adicione o widget ´MonthSelector()´ ao código.
                 });
 ```
 
-### Lista de parâmetros
+### Parameters list
 
-Estes são os principais parâmetros a serem configurados:
+These are the main parameters to be configured:
 
-`callback`: define uma função a ser chamada quando o usuário selecionar uma ou mais datas.
+`callback`: defines a function to be called when the user selects one or more dates.
 
 `selectedDate`: define as datas que estarão selecionadas ao abrir o calendário.
 
