@@ -33,10 +33,30 @@ class _MonthSelectorState extends State<MonthSelector> {
     }).toList();
     return AppDialog(
       yearPage: "2020",
-      body: Wrap(
-        children: [...elements],
-      ),
+      body: wrapElements(
+          elements: elements,
+          widthElement: width,
+          widthScreen: MediaQuery.of(context).size.width * 0.65),
     );
+  }
+
+  List<Widget> wrapElements(
+      {required double widthScreen,
+      required double widthElement,
+      required List<Widget> elements}) {
+    final numRows = ((widthElement * elements.length) / (widthScreen)).ceil();
+    final numCols = elements.length ~/ numRows;
+    final List<Widget> rows = [];
+    for (int i = 0; i < numRows; i++) {
+      final start = i * numCols;
+      final end = (i + 1) * numCols;
+      final rowChildren = elements.sublist(start, end);
+      rows.add(Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: rowChildren,
+      ));
+    }
+    return rows;
   }
 }
 

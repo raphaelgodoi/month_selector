@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class AppDialog extends StatelessWidget {
   final void Function()? left;
   final void Function()? right;
-  final Widget body;
+  final List<Widget> body;
   final String yearPage;
   const AppDialog({
     Key? key,
@@ -34,7 +34,7 @@ class AppDialog extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 20),
-            body,
+            ...body,
             const SizedBox(height: 20),
           ],
         ),
