@@ -4,12 +4,22 @@ import 'package:month_selector/src/app_dialog.dart';
 import 'package:month_selector/src/month_enum.dart';
 
 class MonthSelector extends StatefulWidget {
+  final void Function(List<DateTime>?) callback;
   final List<DateTime> selectedDate;
   final DateTime? firstDate;
   final DateTime? lastDate;
   final bool multiSelection;
   final List<String>? months;
-  final void Function(List<DateTime>?) callback;
+  final double height;
+  final double width;
+  final Color? selectedColor;
+  final Color? selectedTextColor;
+  final double? fontSizeMonth;
+  final Color? colorConfirm;
+  final Color? colorCancel;
+  final String labelConfirm;
+  final String labelCancel;
+  final TextStyle? textStyleYear;
 
   const MonthSelector({
     Key? key,
@@ -17,8 +27,18 @@ class MonthSelector extends StatefulWidget {
     this.selectedDate = const [],
     this.firstDate,
     this.lastDate,
-    this.multiSelection = false,
+    this.multiSelection = true,
     this.months,
+    this.height = 50,
+    this.width = 50,
+    this.selectedColor,
+    this.fontSizeMonth,
+    this.selectedTextColor,
+    this.colorConfirm,
+    this.colorCancel,
+    this.labelConfirm = "Ok",
+    this.labelCancel = "Cancel",
+    this.textStyleYear,
   }) : super(key: key);
 
   @override
@@ -92,20 +112,23 @@ class _MonthSelectorState extends State<MonthSelector> {
 
   @override
   Widget build(BuildContext context) {
-    const width = 50.0;
     final elements = MonthEnum.values.map((e) {
       final date = DateTime(_yearPage, e.index + 1);
       return AppCard(
-        color: isSelected(date) ? null : Colors.transparent,
+        color: isSelected(date) ? widget.selectedColor : Colors.transparent,
         borderColor:
             date == _initialDate ? Theme.of(context).primaryColor : null,
-        width: width,
+        width: widget.width,
+        height: widget.height,
         onTap: () => selectDate(date),
         child: Text(
           widget.months?[e.index] ?? e.name,
           style: TextStyle(
-            fontSize: 15,
-            color: textColor(date),
+            fontSize: widget.fontSizeMonth ?? 15,
+            color: textColor(
+              date: date,
+              selectedTextColor: widget.selectedTextColor,
+            ),
           ),
           textAlign: TextAlign.center,
         ),
@@ -113,20 +136,27 @@ class _MonthSelectorState extends State<MonthSelector> {
     }).toList();
     return AppDialog(
       yearPage: _yearPage.toString(),
+      textStyleYear: widget.textStyleYear,
       left: left,
       right: right,
       cancel: () => widget.callback(null),
       confirm: () => widget.callback(_selectedDate),
+      labelConfirm: widget.labelConfirm,
+      labelCancel: widget.labelCancel,
+      colorConfirm: widget.colorConfirm,
+      colorCancel: widget.colorCancel,
       body: wrapElements(
           elements: elements,
-          widthElement: width,
+          widthElement: widget.height,
           widthScreen: MediaQuery.of(context).size.width * 0.65),
     );
   }
 
-  Color textColor(DateTime date) {
+  Color textColor({required DateTime date, Color? selectedTextColor}) {
     if (isValid(date)) {
-      return isSelected(date) ? Colors.white : Colors.black;
+      return isSelected(date)
+          ? selectedTextColor ?? Colors.white
+          : Colors.black;
     }
     return Colors.black26;
   }

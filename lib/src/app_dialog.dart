@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:month_selector/src/app_button.dart';
 
 class AppDialog extends StatelessWidget {
   final void Function()? left;
@@ -8,6 +7,11 @@ class AppDialog extends StatelessWidget {
   final String yearPage;
   final dynamic Function() cancel;
   final dynamic Function() confirm;
+  final String labelCancel;
+  final String labelConfirm;
+  final Color? colorConfirm;
+  final Color? colorCancel;
+  final TextStyle? textStyleYear;
   const AppDialog({
     Key? key,
     this.left,
@@ -16,6 +20,11 @@ class AppDialog extends StatelessWidget {
     required this.yearPage,
     required this.cancel,
     required this.confirm,
+    this.textStyleYear,
+    required this.labelCancel,
+    required this.labelConfirm,
+    this.colorConfirm,
+    this.colorCancel,
   }) : super(key: key);
 
   @override
@@ -32,7 +41,7 @@ class AppDialog extends StatelessWidget {
                 IconButton(onPressed: left, icon: const Icon(Icons.arrow_left)),
                 Text(
                   yearPage,
-                  style: const TextStyle(fontSize: 20),
+                  style: textStyleYear ?? const TextStyle(fontSize: 20),
                 ),
                 IconButton(
                     onPressed: right, icon: const Icon(Icons.arrow_right)),
@@ -44,8 +53,20 @@ class AppDialog extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                AppButton(onPressed: cancel, label: "Cancelar"),
-                AppButton(onPressed: confirm, label: "Ok")
+                TextButton(
+                  onPressed: cancel,
+                  child: Text(
+                    labelCancel,
+                    style: TextStyle(color: colorCancel),
+                  ),
+                ),
+                TextButton(
+                  onPressed: confirm,
+                  child: Text(
+                    labelConfirm,
+                    style: TextStyle(color: colorConfirm),
+                  ),
+                ),
               ],
             )
           ],
