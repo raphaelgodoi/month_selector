@@ -1,7 +1,6 @@
 name: month_selector
 description: Package to select a month and a year in the calendar
 version: 1.0.0
-author: Darice Sousa <daricesousa@gmail.com>
 homepage: https://github.com/daricesousa/month_selector
 
 environment:
