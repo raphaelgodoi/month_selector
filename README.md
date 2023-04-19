@@ -44,30 +44,17 @@ These are the main parameters to be configured:
 
 `callback`: defines a function to be called when the user selects one or more dates.
 
-`selectedDate`: define as datas que estarão selecionadas ao abrir o calendário.
+`selectedDate`: defines the dates that will be selected when the calendar is opened.
 
-`firstDate`: define a menor data selecionável.
+`firstDate`: defines the earliest selectable date.
 
-`lastDate`: define a maior data selecionável.
+`lastDate`: defines the latest selectable date.
 
-`multiSelection`: permite a seleção de múltiplas datas
+`multiSelection`: allows the selection of multiple dates
 
-`months`: define as strings dos meses exibidos no calendário.
+`months`: defines the month strings displayed on the calendar.
 
 
 
 ## Contributions:
 [Darice Sousa](https://github.com/daricesousa)
-
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
-
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
