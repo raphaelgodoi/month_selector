@@ -27,7 +27,7 @@ class MonthSelector extends StatefulWidget {
     this.selectedDate = const [],
     this.firstDate,
     this.lastDate,
-    this.multiSelection = true,
+    this.multiSelection = false,
     this.months,
     this.height = 50,
     this.width = 50,

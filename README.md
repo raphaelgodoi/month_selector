@@ -25,7 +25,7 @@ Add the following line to `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  month_selector: ^1.0.1
+  month_selector: ^1.0.2
 ```
 To use the Month Selector, import the `month_selector/month_selector.dart` package and add the `MonthSelector` widget to your code. Make sure to check out [example](https://github.com/daricesousa/month_selector/tree/main/example) for more details.
 
