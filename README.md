@@ -1,6 +1,6 @@
 # Month selector
 
-[![Pub Package](https://img.shields.io/badge/pub-v1.0.0-blue)](https://pub.dev/packages/month_selector)
+[![Pub Package](https://img.shields.io/badge/pub-v1.0.1-blue)](https://pub.dev/packages/month_selector)
 [![Pub Package](https://img.shields.io/badge/flutter-%3E%3D1.17.0-green)](https://flutter.dev/)
 
 
@@ -25,7 +25,7 @@ Add the following line to `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  month_selector: ^1.0.0
+  month_selector: ^1.0.1
 ```
 To use the Month Selector, import the `month_selector/month_selector.dart` package and add the `MonthSelector` widget to your code. Make sure to check out [example](https://github.com/daricesousa/month_selector/tree/main/example) for more details.
 
