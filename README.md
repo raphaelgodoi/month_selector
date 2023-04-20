@@ -1,6 +1,6 @@
 # Month selector
 
-[![Pub Package](https://img.shields.io/badge/pub-v1.0.0-blue)](https://pub.dev/packages/calendar_date_picker2)
+[![Pub Package](https://img.shields.io/badge/pub-v1.0.0-blue)](https://pub.dev/packages/month_selector)
 [![Pub Package](https://img.shields.io/badge/flutter-%3E%3D1.17.0-green)](https://flutter.dev/)
 
 
