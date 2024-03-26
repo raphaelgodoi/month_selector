@@ -20,6 +20,7 @@ class MonthSelector extends StatefulWidget {
   final String labelConfirm;
   final String labelCancel;
   final TextStyle? textStyleYear;
+  final Color? unselectedTextColor;
 
   const MonthSelector({
     Key? key,
@@ -39,6 +40,7 @@ class MonthSelector extends StatefulWidget {
     this.labelConfirm = "Ok",
     this.labelCancel = "Cancel",
     this.textStyleYear,
+    this.unselectedTextColor,
   }) : super(key: key);
 
   @override
@@ -128,6 +130,7 @@ class _MonthSelectorState extends State<MonthSelector> {
             color: textColor(
               date: date,
               selectedTextColor: widget.selectedTextColor,
+              unselectedTextColor: widget.unselectedTextColor,
             ),
           ),
           textAlign: TextAlign.center,
@@ -152,11 +155,11 @@ class _MonthSelectorState extends State<MonthSelector> {
     );
   }
 
-  Color textColor({required DateTime date, Color? selectedTextColor}) {
+  Color textColor({required DateTime date, Color? selectedTextColor, Color? unselectedTextColor}) {
     if (isValid(date)) {
       return isSelected(date)
           ? selectedTextColor ?? Colors.white
-          : Colors.black;
+          : unselectedTextColor ?? Colors.black;
     }
     return Colors.black26;
   }
